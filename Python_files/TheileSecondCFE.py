@@ -2,6 +2,9 @@
 # from libsmop import *
 # ..\MATLAB_files\TheileSecondCFE_func.m
 import copy
+import numpy
+from numpy import * 
+from math import * 
     
 def TheileSecondCFE_func(F=None,alp=None,fl=None,fu=None,N=None,*args,**kwargs):
     varargin = args
@@ -20,7 +23,7 @@ def TheileSecondCFE_func(F=None,alp=None,fl=None,fu=None,N=None,*args,**kwargs):
 # ..\MATLAB_files\TheileSecondCFE_func.m:7
     c_0=phik(0,w_0,alp)
 # ..\MATLAB_files\TheileSecondCFE_func.m:8
-    c=zeros(dot(2,N),1)
+    c=numpy.zeros([dot(2,N),1])
 # ..\MATLAB_files\TheileSecondCFE_func.m:9
     for i in arange(1,dot(2,N),1).reshape(-1):
         if (i == 1):
@@ -39,9 +42,9 @@ def TheileSecondCFE_func(F=None,alp=None,fl=None,fu=None,N=None,*args,**kwargs):
 # ..\MATLAB_files\TheileSecondCFE_func.m:22
     po=concat([0])
 # ..\MATLAB_files\TheileSecondCFE_func.m:23
-    an=zeros(dot(2,N))
+    an=numpy.zeros(dot(2,N))
 # ..\MATLAB_files\TheileSecondCFE_func.m:24
-    bn=zeros(dot(2,N))
+    bn=numpy.zeros(dot(2,N))
 # ..\MATLAB_files\TheileSecondCFE_func.m:25
     for j in arange(1,dot(2,N),1).reshape(-1):
         if (j == 1):

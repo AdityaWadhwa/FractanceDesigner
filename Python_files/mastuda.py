@@ -1,7 +1,9 @@
 # Generated with SMOP  0.41-beta
 # from libsmop import *
 # ..\MATLAB_files\mastuda_func.m
-
+import numpy
+from numpy import * 
+from math import * 
     
 def mastuda_func(F=None,alp=None,fl=None,fu=None,N=None,*args,**kwargs):
     varargin = args
@@ -19,7 +21,7 @@ def mastuda_func(F=None,alp=None,fl=None,fu=None,N=None,*args,**kwargs):
     p=logspace(log10(wl),log10(wu),K)
 # ..\MATLAB_files\mastuda_func.m:8
     
-    d=zeros(K,1)
+    d=numpy.zeros([K,1])
 # ..\MATLAB_files\mastuda_func.m:9
     d[1]=p(1) ** alp
 # ..\MATLAB_files\mastuda_func.m:11
@@ -44,9 +46,9 @@ def mastuda_func(F=None,alp=None,fl=None,fu=None,N=None,*args,**kwargs):
 # ..\MATLAB_files\mastuda_func.m:23
     po=concat([0])
 # ..\MATLAB_files\mastuda_func.m:24
-    an=zeros(dot(2,N))
+    an=numpy.zeros(dot(2,N))
 # ..\MATLAB_files\mastuda_func.m:25
-    bn=zeros(dot(2,N))
+    bn=numpy.zeros(dot(2,N))
 # ..\MATLAB_files\mastuda_func.m:26
     for j in arange(1,dot(2,N),1).reshape(-1):
         if (j == 1):

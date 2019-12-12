@@ -2,6 +2,8 @@
 # from libsmop import *
 # ..\MATLAB_files\FirstFoster.m
 import copy
+from numpy import * 
+from math import * 
     
 def FirstFoster_func(Num=None,Den=None,fl=None,fh=None,fstep=None,*args,**kwargs):
     varargin = args

@@ -1,6 +1,13 @@
 # Generated with SMOP  0.41-beta
 # from libsmop import *
 # ..\MATLAB_files\Methodss.m
+import os
+import numpy
+import matplotlib.pyplot as plt
+
+from numpy import *
+from math import *
+
 from adhikari import adhikari_func
 from carlson import coeffcarlson
 from charef import charef_func_TS
@@ -14,6 +21,7 @@ from modoustaloup import coeffmodoustaloup
 from oustaloup import coeffoustaloup
 from TheileSecondCFE import TheileSecondCFE_func
 from valsa import valsa_func
+from readOut import readOut_func
     
 def Methodss(F=None,alp=None,fl=None,fu=None,s1=None,fstep=None,*args,**kwargs):
     varargin = args
@@ -278,36 +286,40 @@ def Methodss(F=None,alp=None,fl=None,fu=None,s1=None,fstep=None,*args,**kwargs):
                                 else:
                                     disp('method mentioned cant be implemented')
     
-    system(concat(['C:\\Cadence\\SPB_17.2\\tools\\bin\\psp_cmd.exe -r ',filename,'.cir',' -wONLY']))
-    data=readOut(concat([filename,'.out']))
+    os.system('C:\\Cadence\\SPB_17.2\\tools\\bin\\psp_cmd.exe -r '+filename+'.cir'+' -wONLY')
+    data=readOut_func(filename+'.out')
 # ..\MATLAB_files\Methodss.m:173
-    Zmag=dot(20,log10(data.Data(arange(),1) / data.Data(arange(),3)))
+    Zmag=multiply(20,numpy.log10(divide(data['Data'][:,0],data['Data'][:,2])))
 # ..\MATLAB_files\Methodss.m:175
     
-    Zpha=data.Data(arange(),2) - data.Data(arange(),4)
+    Zpha=data['Data'][:,1] - data['Data'][:,3]
 # ..\MATLAB_files\Methodss.m:176
     
     if alp < 0:
         Zpha=Zpha - 180
 # ..\MATLAB_files\Methodss.m:179
     else:
-        Zpha=mod(Zpha,180)
+        Zpha=remainder(Zpha,180)
 # ..\MATLAB_files\Methodss.m:181
     
     magError,phaError=errorcalculator(Zmag,Zpha,F,alp,fl,fh,fstep,nargout=2)
 # ..\MATLAB_files\Methodss.m:184
-    figure
-    subplot(1,2,1)
-    semilogx(data.Freq,magError)
-    grid('on')
-    xlabel('Frequency')
-    ylabel('Magnitude(dB) Non Relative Error')
-    subplot(1,2,2)
-    semilogx(data.Freq,phaError)
-    grid('on')
-    xlabel('Frequency')
-    ylabel('Phase Relative Error')
+#    figure
+    plt.subplot(1,2,1)
+    plt.semilogx(data['Freq'],magError)
+    plt.grid('on')
+    plt.xlabel('Frequency')
+    plt.ylabel('Magnitude(dB) Non Relative Error')
+    
+    plt.subplot(1,2,2)
+    plt.semilogx(data['Freq'],phaError)
+    plt.grid('on')
+    plt.xlabel('Frequency')
+    plt.ylabel('Phase Relative Error')
+
+    plt.show()
+    
     return magError,phaError
 
 if __name__ == '__main__':
-    Methodss(1,-0.7,1E-3,1E3,'adhikari',100)
+    Methodss(1,-0.7,1E0,1E6,'adhikari',100)

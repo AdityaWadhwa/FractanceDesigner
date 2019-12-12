@@ -1,8 +1,10 @@
 # Generated with SMOP  0.41-beta
 # from libsmop import *
 # ..\MATLAB_files\valsa_func.m
+import numpy
+from numpy import * 
+from math import * 
 
-    
 def valsa_func(F=None,alp=None,fl=None,fu=None,fstep=None,phierr=None,*args,**kwargs):
     varargin = args
     nargin = 6 + len(varargin)
@@ -25,9 +27,9 @@ def valsa_func(F=None,alp=None,fl=None,fu=None,fstep=None,phierr=None,*args,**kw
 # ..\MATLAB_files\valsa_func.m:12
     m=ceil(1 - ((log10(wu / wl)) / (log10(ab))))
 # ..\MATLAB_files\valsa_func.m:14
-    R=zeros(m,1)
+    R=numpy.zeros([m,1])
 # ..\MATLAB_files\valsa_func.m:16
-    C=zeros(m,1)
+    C=numpy.zeros([m,1])
 # ..\MATLAB_files\valsa_func.m:17
     # we have to choose C1 and R1 so decision to keep C1 constant
     C[1]=1e-06

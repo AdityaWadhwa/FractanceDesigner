@@ -1,6 +1,8 @@
 # Generated with SMOP  0.41-beta
 # from libsmop import *
 # ..\MATLAB_files\phik.m
+from numpy import * 
+from math import * 
 
     
 def phik(k=None,w=None,alp=None,*args,**kwargs):

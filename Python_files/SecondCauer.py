@@ -2,6 +2,9 @@
 # from libsmop import *
 # ..\MATLAB_files\SecondCauer.m
 import copy
+import numpy
+from numpy import * 
+from math import * 
     
 def SecondCauer_func(Numerator=None,Denominator=None,fl=None,fh=None,fstep=None,*args,**kwargs):
     varargin = args
@@ -19,9 +22,9 @@ def SecondCauer_func(Numerator=None,Denominator=None,fl=None,fh=None,fstep=None,
 # ..\MATLAB_files\SecondCauer.m:9
     M,N=size(q,nargout=2)
 # ..\MATLAB_files\SecondCauer.m:11
-    R=zeros(1,dot(2,N))
+    R=numpy.zeros([1,dot(2,N)])
 # ..\MATLAB_files\SecondCauer.m:13
-    C=zeros(1,dot(2,N) + 1)
+    C=numpy.zeros([1,dot(2,N) + 1])
 # ..\MATLAB_files\SecondCauer.m:14
     for i in arange(1,dot(2,N) + 1,1).reshape(-1):
         idxN=find(abs(Num) > 1e-05,1,'last')

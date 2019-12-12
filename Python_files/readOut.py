@@ -2,10 +2,14 @@
 # from libsmop import *
 # ..\MATLAB_files\readOut.m
 import copy
+from numpy import * 
+from math import * 
     
-def readOut(filename=None,*args,**kwargs):
+def readOut_func(filename=None,*args,**kwargs):
     varargin = args
     nargin = 1 + len(varargin)
+    f = {}
+    data = {}
 
     global oldpath
     if nargin < 1:
@@ -21,87 +25,46 @@ def readOut(filename=None,*args,**kwargs):
         else:
             oldpath=copy.copy(path)
 # ..\MATLAB_files\readOut.m:16
-            filename=concat([path,file])
+            filename=(path+file)
 # ..\MATLAB_files\readOut.m:17
     
     # open the file
-    f.id = copy.copy(fopen(filename))
+    f['id'] = open(filename,'r')
 # ..\MATLAB_files\readOut.m:21
     # node name import
-    data.Name = copy.copy(readNodes(f))
+    data['Name'] = readNodes(filename)
 # ..\MATLAB_files\readOut.m:24
     # import the time line (very important - time is not spaced linearly!!!)
-    data.Freq,data.Data=readData(f,nargout=2)
+    data['Freq'],data['Data']=readData(filename,nargout=2)
 # ..\MATLAB_files\readOut.m:26
     # continue with data import
 #data.Data = readData(f);
     
-    f.id = copy.copy(fclose(f.id))
+    f['id'].close()
 # ..\MATLAB_files\readOut.m:30
     # the following code checks what you want and formats the data accordingly
-    if 1 == nargout:
-        if data.Name[1](1) == 'F':
-            #             data.Real = data.Data(1:2:end,:);
-#             data.Imag = data.Data(2:2:end,:);
-#             data.Cmplx = data.Real + 1i.*data.Imag;
-#             data = rmfield(data,'Data');
-            pass
-        #         data.Name(1) = []; # time is extra, therefore delete its node name
-    else:
-        if 2 == nargout:
-            text=data.Name.T
-# ..\MATLAB_files\readOut.m:44
-            if data.Name[1](1) == 'F':
-                data=concat([data.Freq,data.Data(arange(1,end(),2),arange())])
-# ..\MATLAB_files\readOut.m:46
-                data=copy.copy(data)
-# ..\MATLAB_files\readOut.m:47
-            else:
-                data=concat([data.Freq,data.Data])
-# ..\MATLAB_files\readOut.m:49
-        else:
-            if data.Name[1](1) == 'F':
-                subplot(2,1,1)
-                semilogx(data.Time,data.Data(arange(1,end(),2),arange()))
-                set(gca,'XTickLabel',[])
-                legend(data.Name(arange(2,end())))
-                ylabel('real')
-                subplot(2,1,2)
-                semilogx(data.Time,data.Data(arange(2,end(),2),arange()))
-                xlabel(data.Name[1])
-                ylabel('imaginary')
-            else:
-                plot(data.Freq,data.Data)
-                xlabel(data.Name[1])
-                legend(data.Name(arange(2,end())))
-            clear('data')
+    return data 
     
-    
-@function
-def readNodes(f=None,*args,**kwargs):
+def readNodes(filename=None,*args,**kwargs):
     varargin = args
     nargin = 1 + len(args)
 
-    N=cellarray([])
+    N=list()
 # ..\MATLAB_files\readOut.m:72
-    C=textscan(f.id,'%s','Delimiter','\\n')
+    C=loadtxt(filename,dtype='str',delimiter='\n')
 # ..\MATLAB_files\readOut.m:73
-    idx=find(logical_not(cellfun('isempty',strfind(C[1,1],'FREQ'))),1)
+#    idx=find(logical_not(cellfun('isempty',strfind(C[1,1],'FREQ'))),1)
 # ..\MATLAB_files\readOut.m:74
-    NameLine=C[1,1][idx,1]
+    NameLine=C[char.find(C,'FREQ')!=-1]
 # ..\MATLAB_files\readOut.m:75
-    Names=textscan(NameLine,'%s')
+    Names=NameLine[0].split()
 # ..\MATLAB_files\readOut.m:76
-    N=Names[1,1](arange(2,end())).T
+    N=Names[1:]
 # ..\MATLAB_files\readOut.m:77
     return N
+        
     
-if __name__ == '__main__':
-    pass
-    
-    
-@function
-def readData(f=None,*args,**kwargs):
+def readData(filename=None,*args,**kwargs):
     varargin = args
     nargin = 1 + len(args)
 
@@ -109,45 +72,44 @@ def readData(f=None,*args,**kwargs):
 # ..\MATLAB_files\readOut.m:81
     D=[]
 # ..\MATLAB_files\readOut.m:82
-    frewind(f.id)
-    C=textscan(f.id,'%s','Delimiter','\\n')
+#    frewind(f.id)
+    C=loadtxt(filename,dtype='str',delimiter='\n')
 # ..\MATLAB_files\readOut.m:84
-    idx=find(logical_not(cellfun('isempty',strfind(C[1,1],'FREQ'))),1)
+    idx=char.find(C,'FREQ')!=-1
+    idx=where(idx==True)[0][0]
 # ..\MATLAB_files\readOut.m:85
-    idx=idx + 3
+    idx=idx + 1
 # ..\MATLAB_files\readOut.m:86
     
     
-    i=1
+#    i=1
 # ..\MATLAB_files\readOut.m:88
     while 1:
 
-        Line=C[1,1][idx,1]
+        Line=C[idx]
 # ..\MATLAB_files\readOut.m:90
-        if (isempty(Line)):
-            break
-        frmt=repmat('%.6f ',1,length(data.Name) + 1)
+#        if Line == []:
+#            break
+#        frmt=repmat('%.6f ',1,length(data.Name) + 1)
 # ..\MATLAB_files\readOut.m:94
-        temp=textscan(Line,frmt,'Delimiter','\\n')
+        temp=fromstring(Line,dtype='float',sep='   ')
+        if(len(temp)<2):
+            break
 # ..\MATLAB_files\readOut.m:95
-        F[i,1]=temp[1,1]
+        F.append(temp[0])
 # ..\MATLAB_files\readOut.m:96
-        for j in arange(2,length(data.Name) + 1,1).reshape(-1):
-            D[i,j - 1]=temp[1,j]
+        D.append(temp[1:])
 # ..\MATLAB_files\readOut.m:98
-        i=i + 1
+#        i =i + 1
 # ..\MATLAB_files\readOut.m:100
-        idx=idx + 1
+        idx+=1
 # ..\MATLAB_files\readOut.m:101
 
-    
+    F = array(F)
+    D = array(D)
     return F,D
     
 if __name__ == '__main__':
     pass
     
-    return F,D
-    
-if __name__ == '__main__':
-    pass
     

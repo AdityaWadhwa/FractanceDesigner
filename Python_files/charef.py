@@ -4,6 +4,8 @@
 
 # charef's method, more realistic for higher frequencies
 import copy
+from numpy import * 
+from math import * 
     
 def charef_func_TS(F=None,alp=None,fl=None,fu=None,derr=None,*args,**kwargs):
     varargin = args

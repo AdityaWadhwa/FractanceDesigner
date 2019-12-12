@@ -2,6 +2,8 @@
 # from libsmop import *
 # ..\MATLAB_files\coeffmodoustaloup.m
 import copy
+from numpy import * 
+from math import * 
     
 def coeffmodoustaloup(F=None,alp=None,fl=None,fh=None,N=None,*args,**kwargs):
     varargin = args
