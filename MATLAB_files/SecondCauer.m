@@ -15,8 +15,8 @@ C = zeros(1,2*N+1);
 
 for i = 1:1:2*N+1
     
-    idxN = find(abs(Num)>1E-5, 1, 'last');
-    idxD = find(abs(Den)>1E-5, 1, 'last');
+    idxN = find(Num>0, 1, 'last');
+    idxD = find(Den>0, 1, 'last');
     
     Num(idxN+1:end)=0;
     Den(idxD+1:end)=0;

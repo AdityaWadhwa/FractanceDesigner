@@ -58,7 +58,7 @@ def Methodss(F=None,alp=None,fl=None,fu=None,s1=None,fstep=None,*args,**kwargs):
 # ..\MATLAB_files\Methodss.m:24
             else:
                 if (l == 1):
-                    phierr=varargin[1]
+                    phierr=varargin[0]
 # ..\MATLAB_files\Methodss.m:26
             filename=valsa_func(F,alp,fl,fu,fstep,phierr)
 # ..\MATLAB_files\Methodss.m:28
@@ -72,17 +72,17 @@ def Methodss(F=None,alp=None,fl=None,fu=None,s1=None,fstep=None,*args,**kwargs):
 # ..\MATLAB_files\Methodss.m:33
                 else:
                     if (l == 1):
-                        N=varargin[1]
+                        N=varargin[0]
 # ..\MATLAB_files\Methodss.m:35
                         param1='FirstFoster'
 # ..\MATLAB_files\Methodss.m:36
                     else:
                         if (l == 2):
-                            N=varargin[1]
+                            N=varargin[0]
 # ..\MATLAB_files\Methodss.m:38
-                            param1=varargin[2]
+                            param1=varargin[1]
 # ..\MATLAB_files\Methodss.m:39
-                num,den=mastuda_func(F,alp,fl,fu,N,nargout=2)
+                num,den=mastuda_func(F,alp,fl,fu,N)
 # ..\MATLAB_files\Methodss.m:41
                 if (param1=='FirstFoster'):
                     filename=FirstFoster_func(num,den,fl,fu,fstep)
@@ -109,17 +109,17 @@ def Methodss(F=None,alp=None,fl=None,fu=None,s1=None,fstep=None,*args,**kwargs):
 # ..\MATLAB_files\Methodss.m:56
                     else:
                         if (l == 1):
-                            N=varargin[1]
+                            N=varargin[0]
 # ..\MATLAB_files\Methodss.m:58
                             param1='FirstFoster'
 # ..\MATLAB_files\Methodss.m:59
                         else:
                             if (l == 2):
-                                N=varargin[1]
+                                N=varargin[0]
 # ..\MATLAB_files\Methodss.m:61
-                                param1=varargin[2]
+                                param1=varargin[1]
 # ..\MATLAB_files\Methodss.m:62
-                    num,den=TheileSecondCFE_func(F,alp,fl,fu,N,nargout=2)
+                    num,den=TheileSecondCFE_func(F,alp,fl,fu,N)
 # ..\MATLAB_files\Methodss.m:64
                     if (param1=='FirstFoster'):
                         filename=FirstFoster_func(num,den,fl,fu,fstep)
@@ -146,15 +146,15 @@ def Methodss(F=None,alp=None,fl=None,fu=None,s1=None,fstep=None,*args,**kwargs):
 # ..\MATLAB_files\Methodss.m:79
                         else:
                             if (l == 1):
-                                N=varargin[1]
+                                N=varargin[0]
 # ..\MATLAB_files\Methodss.m:81
                                 param1='FirstFoster'
 # ..\MATLAB_files\Methodss.m:82
                             else:
                                 if (l == 2):
-                                    N=varargin[1]
+                                    N=varargin[0]
 # ..\MATLAB_files\Methodss.m:84
-                                    param1=varargin[2]
+                                    param1=varargin[1]
 # ..\MATLAB_files\Methodss.m:85
                         num,den=coeffoustaloup(F,alp,fl,fh,N,nargout=2)
 # ..\MATLAB_files\Methodss.m:87
@@ -183,15 +183,15 @@ def Methodss(F=None,alp=None,fl=None,fu=None,s1=None,fstep=None,*args,**kwargs):
 # ..\MATLAB_files\Methodss.m:102
                             else:
                                 if (l == 1):
-                                    N=varargin[1]
+                                    N=varargin[0]
 # ..\MATLAB_files\Methodss.m:104
                                     param1='FirstFoster'
 # ..\MATLAB_files\Methodss.m:105
                                 else:
                                     if (l == 2):
-                                        N=varargin[1]
+                                        N=varargin[0]
 # ..\MATLAB_files\Methodss.m:107
-                                        param1=varargin[2]
+                                        param1=varargin[1]
 # ..\MATLAB_files\Methodss.m:108
                             num,den=coeffmodoustaloup(F,alp,fl,fh,N,nargout=2)
 # ..\MATLAB_files\Methodss.m:110
@@ -220,15 +220,15 @@ def Methodss(F=None,alp=None,fl=None,fu=None,s1=None,fstep=None,*args,**kwargs):
 # ..\MATLAB_files\Methodss.m:125
                                 else:
                                     if (l == 1):
-                                        derr=varargin[1]
+                                        derr=varargin[0]
 # ..\MATLAB_files\Methodss.m:127
                                         param1='FirstFoster'
 # ..\MATLAB_files\Methodss.m:128
                                     else:
                                         if (l == 2):
-                                            derr=varargin[1]
+                                            derr=varargin[0]
 # ..\MATLAB_files\Methodss.m:130
-                                            param1=varargin[2]
+                                            param1=varargin[1]
 # ..\MATLAB_files\Methodss.m:131
                                 num,den=charef_func_TS(F,alp,fl,fu,derr,nargout=2)
 # ..\MATLAB_files\Methodss.m:133
@@ -256,15 +256,15 @@ def Methodss(F=None,alp=None,fl=None,fu=None,s1=None,fstep=None,*args,**kwargs):
 # ..\MATLAB_files\Methodss.m:147
                                     else:
                                         if (l == 1):
-                                            N=varargin[1]
+                                            N=varargin[0]
 # ..\MATLAB_files\Methodss.m:149
                                             param1='FirstFoster'
 # ..\MATLAB_files\Methodss.m:150
                                         else:
                                             if (l == 2):
-                                                N=varargin[1]
+                                                N=varargin[0]
 # ..\MATLAB_files\Methodss.m:152
-                                                param1=varargin[2]
+                                                param1=varargin[1]
 # ..\MATLAB_files\Methodss.m:153
                                     num,den=coeffcarlson(F,alp,fl,fu,N,nargout=2)
 # ..\MATLAB_files\Methodss.m:155
@@ -299,7 +299,7 @@ def Methodss(F=None,alp=None,fl=None,fu=None,s1=None,fstep=None,*args,**kwargs):
         Zpha=Zpha - 180
 # ..\MATLAB_files\Methodss.m:179
     else:
-        Zpha=remainder(Zpha,180)
+        Zpha=Zpha%180
 # ..\MATLAB_files\Methodss.m:181
     
     magError,phaError=errorcalculator(Zmag,Zpha,F,alp,fl,fh,fstep,nargout=2)
@@ -322,4 +322,4 @@ def Methodss(F=None,alp=None,fl=None,fu=None,s1=None,fstep=None,*args,**kwargs):
     return magError,phaError
 
 if __name__ == '__main__':
-    Methodss(1,-0.9,1E0,1E6,'mastuda',100)
+    Methodss(1,-0.5,1E-3,1E3,'adhikari',100)

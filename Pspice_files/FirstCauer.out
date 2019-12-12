@@ -1,0 +1,57 @@
+
+**** 12/13/19 02:21:05 ******* PSpice Lite (March 2016) ******* ID# 10813 ****
+
+ * Matlab created *.cir-file *
+
+
+ ****     CIRCUIT DESCRIPTION
+
+
+******************************************************************************
+
+
+
+.lib C:\Cadence\SPB_17.2\tools\pspice\library\eval.lib
+VIN        1   0   AC 1V
+R1 1 2 0.0006007458385762286
+C2 2 0 0.0018063335100826155
+R2 2 3 0.00302434975942266
+C3 3 0 0.004263560345171851
+R3 3 4 0.005533492642181323
+C4 4 0 0.006844829881070879
+R4 4 5 0.008209911717123918
+C5 5 0 0.0
+-------$
+ERROR(ORPSIM-16144): Value may not be 0
+R5 5 6 0.0
+-------$
+ERROR(ORPSIM-16144): Value may not be 0
+C6 6 0 0.0
+-------$
+ERROR(ORPSIM-16144): Value may not be 0
+R6 6 7 0.0
+-------$
+ERROR(ORPSIM-16144): Value may not be 0
+C7 7 0 0.0
+-------$
+ERROR(ORPSIM-16144): Value may not be 0
+R7 7 8 0.0
+-------$
+ERROR(ORPSIM-16144): Value may not be 0
+C8 8 0 0.0
+-------$
+ERROR(ORPSIM-16144): Value may not be 0
+R8 8 9 575968664169.375
+C9 9 0 1.338253650733293e-34
+R9 9 10 -575968664169.3749
+C10 10 0 -0.010731564841932512
+R10 10 11 0.0
+----------$
+ERROR(ORPSIM-16144): Value may not be 0
+C11 11 0 inf
+------------$
+ERROR(ORPSIM-16387): Missing value
+.AC DEC 100 1.0 1000000.0
+.PRINT AC VM(1) VP(1) IM(VIN) IP(VIN)
+.END
+

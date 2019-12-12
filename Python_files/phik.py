@@ -3,9 +3,10 @@
 # ..\MATLAB_files\phik.m
 from numpy import * 
 from math import * 
+from copy import copy
 
     
-def phik(k=None,w=None,alp=None,*args,**kwargs):
+def phik_func(k=None,w=None,alp=None,*args,**kwargs):
     varargin = args
     nargin = 3 + len(varargin)
 
@@ -25,18 +26,18 @@ def phik(k=None,w=None,alp=None,*args,**kwargs):
             phik_val=copy(phi_1)
 # ..\MATLAB_files\phik.m:10
         else:
-            if (mod(k,2) == 0):
-                m=k / 2
+            if (remainder(k,2) == 0):
+                m=k // 2
 # ..\MATLAB_files\phik.m:12
-                for i in arange(1,m,1).reshape(-1):
+                for i in range(1,m+1):
                     prod=dot(prod,(i + alp)) / (i - alp)
 # ..\MATLAB_files\phik.m:14
                 phik_val=dot(prod,phi_0)
 # ..\MATLAB_files\phik.m:16
             else:
-                m=(k - 1) / 2
+                m=(k - 1) // 2
 # ..\MATLAB_files\phik.m:18
-                for i in arange(1,m,1).reshape(-1):
+                for i in range(1,m+1):
                     prod=dot(prod,(i - alp + 1)) / (i + alp)
 # ..\MATLAB_files\phik.m:20
                 phik_val=dot(dot(prod,phi_1),(m + 1))
