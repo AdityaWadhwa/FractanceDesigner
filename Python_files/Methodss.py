@@ -46,7 +46,7 @@ def Methodss(F=None,alp=None,fl=None,fu=None,s1=None,fstep=None,*args,**kwargs):
 # ..\MATLAB_files\Methodss.m:16
         else:
             if (l == 1):
-                N=varargin[1]
+                N=varargin[0]
 # ..\MATLAB_files\Methodss.m:18
         filename=adhikari_func(F,alp,fl,fh,fstep,N)
 # ..\MATLAB_files\Methodss.m:20
@@ -318,8 +318,8 @@ def Methodss(F=None,alp=None,fl=None,fu=None,s1=None,fstep=None,*args,**kwargs):
     plt.ylabel('Phase Relative Error')
 
     plt.show()
-    
+
     return magError,phaError
 
 if __name__ == '__main__':
-    Methodss(1,-0.7,1E0,1E6,'adhikari',100)
+    Methodss(1,-0.9,1E0,1E6,'mastuda',100)

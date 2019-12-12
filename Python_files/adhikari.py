@@ -92,7 +92,6 @@ def adhikari_func(F=None,alp=None,fl=None,fh=None,fstep=None,N=None,*args,**kwar
 # ..\MATLAB_files\adhikari.m:56
     line.append(['.END'])
 # ..\MATLAB_files\adhikari.m:57
-    print(line)
     # writing netlist to file
     f=open((filename+'.cir'),'w')
 # ..\MATLAB_files\adhikari.m:60
