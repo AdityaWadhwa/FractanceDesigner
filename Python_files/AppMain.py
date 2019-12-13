@@ -204,7 +204,7 @@ class Window(QWidget):
         # this is the Canvas Widget that displays the `figure`
         # it takes the `figure` instance as a parameter to __init__
         self.canvas = FigureCanvas(self.figure)
-
+        
         self.outputTab.layout.addWidget(self.canvas, 0, 1)
         
         self.outputTab.setLayout(self.outputTab.layout)
@@ -273,32 +273,30 @@ class Window(QWidget):
         # create an axis
         ax1 = self.figure.add_subplot(211)
         ax2 = self.figure.add_subplot(212)
-
+        
         if self.gs_radio1.isChecked():
             ax1.clear()                             # discards the old graph
             ax1.semilogx(self.f,self.Zmagi)         # plot data
             ax2.clear()                             # discards the old graph
             ax2.semilogx(self.f,self.Zphai)         # plot data
-            self.canvas.draw()                      # refresh canvas
         elif self.gs_radio2.isChecked():
             ax1.clear()                             # discards the old graph
             ax1.semilogx(self.f,self.Zmag)          # plot data
             ax2.clear()                             # discards the old graph
             ax2.semilogx(self.f,self.Zpha)          # plot data
-            self.canvas.draw()                      # refresh canvas
         elif self.gs_radio3.isChecked():
             ax1.clear()                             # discards the old graph
             ax1.semilogx(self.f,self.Zmagi,self.f,self.Zmag) # plot data
             ax2.clear()                             # discards the old graph
             ax2.semilogx(self.f,self.Zphai,self.f,self.Zpha)# plot data
-            self.canvas.draw()                      # refresh canvas
         elif self.gs_radio4.isChecked():
             ax1.clear()                             # discards the old graph
             ax1.semilogx(self.f,self.magError)      # plot data
             ax2.clear()                             # discards the old graph
             ax2.semilogx(self.f,self.phaError)      # plot data
-            self.canvas.draw()                      # refresh canvas
-        
+        ax1.grid()
+        ax2.grid()        
+        self.canvas.draw()                      # refresh canvas
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

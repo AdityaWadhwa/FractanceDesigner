@@ -1,5 +1,5 @@
 
-**** 12/13/19 16:37:54 ******* PSpice Lite (March 2016) ******* ID# 10813 ****
+**** 12/13/19 17:21:07 ******* PSpice Lite (March 2016) ******* ID# 10813 ****
 
  * Matlab created *.cir-file *
 
@@ -42,7 +42,7 @@ R13 13 0 1.8891567562630236e-07
 .PRINT AC VM(1) VP(1) IM(VIN) IP(VIN)
 .END
 
-**** 12/13/19 16:37:54 ******* PSpice Lite (March 2016) ******* ID# 10813 ****
+**** 12/13/19 17:21:07 ******* PSpice Lite (March 2016) ******* ID# 10813 ****
 
  * Matlab created *.cir-file *
 
@@ -76,7 +76,7 @@ R13 13 0 1.8891567562630236e-07
     TOTAL POWER DISSIPATION   0.00E+00  WATTS
 
 
-**** 12/13/19 16:37:54 ******* PSpice Lite (March 2016) ******* ID# 10813 ****
+**** 12/13/19 17:21:07 ******* PSpice Lite (March 2016) ******* ID# 10813 ****
 
  * Matlab created *.cir-file *
 
@@ -696,7 +696,7 @@ R13 13 0 1.8891567562630236e-07
 
           JOB CONCLUDED
 
-**** 12/13/19 16:37:54 ******* PSpice Lite (March 2016) ******* ID# 10813 ****
+**** 12/13/19 17:21:07 ******* PSpice Lite (March 2016) ******* ID# 10813 ****
 
  * Matlab created *.cir-file *
 
@@ -708,5 +708,5 @@ R13 13 0 1.8891567562630236e-07
 
 
 
-  Total job time (using Solver 1)   =         .08
+  Total job time (using Solver 1)   =         .02
 

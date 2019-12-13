@@ -14,10 +14,10 @@ def charef_func_TS(F=None,alp=None,fl=None,fu=None,derr=None,*args,**kwargs):
     err=1e-05
 # ..\MATLAB_files\charef_func_TS.m:4
     
-    wl=copy(fl)
+    wl=copy(2*pi*fl)
 # ..\MATLAB_files\charef_func_TS.m:5
     #wl = 2*pi*fl;
-    wu=copy(fu)
+    wu=copy(2*pi*fu)
 # ..\MATLAB_files\charef_func_TS.m:7
     #wu = 2*pi*fu;
     
