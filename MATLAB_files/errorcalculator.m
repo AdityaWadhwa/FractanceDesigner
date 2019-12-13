@@ -11,9 +11,16 @@ phaError = abs((Zpha - Zphai)./Zphai);
 
 figure;
 subplot(1,2,1);
-semilogx(f,Zmagi,f,Zmag);
+semilogx(f,Zmagi,f,Zmag,'linewidth',2);
+grid on;
+xlabel('Frequency','FontSize',12,'FontWeight','bold');
+ylabel('Magnitude(dB)','FontSize',12,'FontWeight','bold');
+
 
 subplot(1,2,2);
-semilogx(f,Zphai,f,Zpha);
+semilogx(f,Zphai,f,Zpha,'linewidth',2);
+grid on;
+xlabel('Frequency','FontSize',12,'FontWeight','bold');
+ylabel('Phase (degree)','FontSize',12,'FontWeight','bold');
 
 end

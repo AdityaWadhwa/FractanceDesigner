@@ -186,15 +186,15 @@ end
 figure;
 
 subplot(1,2,1);
-semilogx(data.Freq,magError);
+semilogx(data.Freq,magError,'linewidth',2);
 grid on;
-xlabel('Frequency');
-ylabel('Magnitude(dB) Non Relative Error');
+xlabel('Frequency','FontSize',12,'FontWeight','bold');
+ylabel('Magnitude(dB) Non Relative Error','FontSize',12,'FontWeight','bold');
 
 subplot(1,2,2);
-semilogx(data.Freq,phaError);
+semilogx(data.Freq,phaError,'linewidth',2);
 grid on;
-xlabel('Frequency');
-ylabel('Phase Relative Error');
+xlabel('Frequency','FontSize',12,'FontWeight','bold');
+ylabel('Phase Relative Error','FontSize',12,'FontWeight','bold');
 
 return

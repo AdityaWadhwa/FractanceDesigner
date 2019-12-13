@@ -1,8 +1,10 @@
 * Matlab created *.cir-file *
 .lib C:\Cadence\SPB_17.2\tools\pspice\library\eval.lib
 VIN        1   0   AC 1V
-R1 1 0 682.6346
-C2 1 2 308.0689
+R1 1 0 9
+C2 1 2 2.963
+R2 2 0 1.7325
+C3 2 3 1.1874
 
 
 
@@ -10,31 +12,7 @@ C2 1 2 308.0689
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-R3 2 0 234.5829
-.AC DEC 100 0.001 1000
+R4 3 0 0.86892
+.AC DEC 100 0.1 10
 .PRINT AC VM(1) VP(1) IM(VIN) IP(VIN)
 .END

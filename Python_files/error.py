@@ -26,15 +26,15 @@ def errorcalculator(Zmag=None,Zpha=None,F=None,alp=None,fl=None,fh=None,fstep=No
     phaError=abs((Zpha - Zphai) / Zphai)
 # ..\MATLAB_files\errorcalculator.m:10
 #    figure
-    plt.subplot(1,2,1)
-    plt.semilogx(f,Zmagi,f,Zmag)
-    
-    plt.subplot(1,2,2)
-    plt.semilogx(f,Zphai,f,Zpha)
+#    plt.subplot(1,2,1)
+#    plt.semilogx(f,Zmagi,f,Zmag)
+#    
+#    plt.subplot(1,2,2)
+#    plt.semilogx(f,Zphai,f,Zpha)
+#
+#    plt.show()
 
-    plt.show()
-
-    return magError,phaError
+    return Zmagi,Zphai,Zmag,Zpha,magError,phaError
     
 if __name__ == '__main__':
     pass

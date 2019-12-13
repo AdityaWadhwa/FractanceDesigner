@@ -23,7 +23,7 @@ from TheileSecondCFE import TheileSecondCFE_func
 from valsa import valsa_func
 from readOut import readOut_func
     
-def Methodss(F=None,alp=None,fl=None,fu=None,s1=None,fstep=None,*args,**kwargs):
+def calculator(F=None,alp=None,fl=None,fu=None,s1=None,fstep=None,*args,**kwargs):
     varargin = args
     nargin = 6 + len(varargin)
 
@@ -302,24 +302,25 @@ def Methodss(F=None,alp=None,fl=None,fu=None,s1=None,fstep=None,*args,**kwargs):
         Zpha=Zpha%180
 # ..\MATLAB_files\Methodss.m:181
     
-    magError,phaError=errorcalculator(Zmag,Zpha,F,alp,fl,fh,fstep,nargout=2)
+    Zmagi,Zphai,Zmag,Zpha,magError,phaError = errorcalculator(Zmag,Zpha,F,alp,fl,fh,fstep)
 # ..\MATLAB_files\Methodss.m:184
 #    figure
-    plt.subplot(1,2,1)
-    plt.semilogx(data['Freq'],magError)
-    plt.grid('on')
-    plt.xlabel('Frequency')
-    plt.ylabel('Magnitude(dB) Non Relative Error')
-    
-    plt.subplot(1,2,2)
-    plt.semilogx(data['Freq'],phaError)
-    plt.grid('on')
-    plt.xlabel('Frequency')
-    plt.ylabel('Phase Relative Error')
+#    plt.subplot(1,2,1)
+#    plt.semilogx(data['Freq'],magError)
+#    plt.grid('on')
+#    plt.xlabel('Frequency')
+#    plt.ylabel('Magnitude(dB) Non Relative Error')
+#    
+#    plt.subplot(1,2,2)
+#    plt.semilogx(data['Freq'],phaError)
+#    plt.grid('on')
+#    plt.xlabel('Frequency')
+#    plt.ylabel('Phase Relative Error')
+#
+#    plt.show()
 
-    plt.show()
-
-    return magError,phaError
+    return Zmagi,Zphai,Zmag,Zpha,magError,phaError
 
 if __name__ == '__main__':
-    Methodss(1,-0.5,1E-3,1E3,'adhikari',100)
+    pass
+#    Methodss(1,-0.5,1E-3,1E3,'adhikari',100)
