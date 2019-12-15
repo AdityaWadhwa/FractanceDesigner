@@ -1,0 +1,5 @@
+Fractional Order Circuits and Systems have been useful in modern versions of Control Systems and in Biomedical Engineering to improve the functioning of their existing counterparts. Many of our tissues and natural substances have the nature of a fractance and application of fractional order systems in their application estimates the reality better.
+
+There are a variety of research domains in fractional order systems like fractional-order oscillators, fractional-order filters, fractional-order control systems, etc. These can be represented in many forms such as state-space and transfer functions. Their ultimate appearance is due to devices termed as fractances where the impedance is of the form s to the power 𝛼. Now, to develop fractances, there are again various ways like electrolytic process, fractal structure on silicon or the rational approximation and their corresponding network.
+
+Our work focuses on the development of fractances by various approximation methods, their comparison, stability and error analysis, and their use in fractional order filters.

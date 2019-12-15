@@ -4,10 +4,12 @@ import math
 import matplotlib.pyplot as plt
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt, QRegExp
+from PyQt5.QtGui import QRegExpValidator
 from PyQt5.QtWidgets import (QApplication, QCheckBox, QGridLayout, QGroupBox,
         QMenu, QPushButton, QRadioButton, QVBoxLayout, QWidget, QSlider, QLabel, QHBoxLayout, QLineEdit, QMessageBox,QTabWidget)
 from Methodss import calculator
+from sympy import pretty_print as pp
 
 class Window(QWidget):
     def __init__(self, parent=None):
@@ -38,7 +40,7 @@ class Window(QWidget):
         self.mb_radio6 = QRadioButton("Modified Oustaloup Method")
         self.mb_radio7 = QRadioButton("Charef Method")
         self.mb_radio8 = QRadioButton("Carlson Method")
-
+        
         self.mb_radio1.setChecked(True)
 
         self.vbox = QVBoxLayout()
@@ -63,7 +65,7 @@ class Window(QWidget):
         self.cb_radio3 = QRadioButton("Second Foster")
         self.cb_radio4 = QRadioButton("First Cauer")
         self.cb_radio5 = QRadioButton("Second Cauer")
-        
+    
         self.cb_radio1.setChecked(True)
 
         self.vbox = QVBoxLayout()
@@ -91,11 +93,15 @@ class Window(QWidget):
         self.fl_slider.setValue(0)
         self.fl_slider.setTickPosition(QSlider.TicksBelow)
         self.fl_slider.setTickInterval(1)
+        self.fl_slider.valueChanged.connect(self.changeFl)
+
+        self.fl_value = QLabel("0")
 
         self.hbox = QHBoxLayout()
         self.hbox.addWidget(self.fl_label)
         self.hbox.addWidget(self.fl_slider)
-        
+        self.hbox.addWidget(self.fl_value)
+
         self.vbox.addLayout(self.hbox)
         
         self.fu_label = QLabel("Fu")
@@ -106,10 +112,14 @@ class Window(QWidget):
         self.fu_slider.setValue(6)
         self.fu_slider.setTickPosition(QSlider.TicksBelow)
         self.fu_slider.setTickInterval(1)
+        self.fu_slider.valueChanged.connect(self.changeFu)
+
+        self.fu_value = QLabel("6")
 
         self.hbox = QHBoxLayout()
         self.hbox.addWidget(self.fu_label)
         self.hbox.addWidget(self.fu_slider)
+        self.hbox.addWidget(self.fu_value)
 
         self.vbox.addLayout(self.hbox)
 
@@ -121,11 +131,20 @@ class Window(QWidget):
         self.fstep_slider.setValue(2)
         self.fstep_slider.setTickPosition(QSlider.TicksBelow)
         self.fstep_slider.setTickInterval(1)
+        self.fstep_slider.valueChanged.connect(self.changeFstep)
+
+        self.fstep_value = QLabel("2")
 
         self.hbox = QHBoxLayout()
         self.hbox.addWidget(self.fstep_label)
         self.hbox.addWidget(self.fstep_slider)
+        self.hbox.addWidget(self.fstep_value)
 
+        self.vbox.addLayout(self.hbox)
+
+        self.blank_label = QLabel("\t"*10+"10^")
+        self.hbox = QHBoxLayout()
+        self.hbox.addWidget(self.blank_label)
         self.vbox.addLayout(self.hbox)
 
         self.frequencyBox.setLayout(self.vbox)
@@ -180,7 +199,7 @@ class Window(QWidget):
         self.gs_radio3 = QRadioButton("Ideal+Simulated")
         self.gs_radio4 = QRadioButton("Error")
         
-        self.gs_radio4.setChecked(True)
+        self.gs_radio3.setChecked(True)
 
         self.gs_radio1.toggled.connect(self.updatePlot)
         self.gs_radio2.toggled.connect(self.updatePlot)
@@ -216,6 +235,49 @@ class Window(QWidget):
         self.setWindowTitle("Fractional Order Filters GUI Tool")
         self.resize(1000, 500)
 
+        self.mb_radio1.toggled.connect(self.restrictions)
+        self.mb_radio2.toggled.connect(self.restrictions)
+        self.mb_radio3.toggled.connect(self.restrictions)
+        self.mb_radio4.toggled.connect(self.restrictions)  
+        self.mb_radio5.toggled.connect(self.restrictions)
+        self.mb_radio6.toggled.connect(self.restrictions)
+        self.mb_radio7.toggled.connect(self.restrictions)
+        self.mb_radio8.toggled.connect(self.restrictions)
+
+        self.restrictions()  
+
+    def changeFstep(self):
+        self.fstep_value.setText(str(self.fstep_slider.value()))
+
+    def changeFl(self):
+        self.fl_value.setText(str(self.fl_slider.value()))
+
+    def changeFu(self):
+        self.fu_value.setText(str(self.fu_slider.value()))
+
+    def restrictions(self):
+        if self.mb_radio1.isChecked() or self.mb_radio2.isChecked():
+            self.cb_radio1.setEnabled(True)
+            self.cb_radio2.setEnabled(False)
+            self.cb_radio3.setEnabled(False)
+            self.cb_radio4.setEnabled(False)
+            self.cb_radio5.setEnabled(False)
+            self.cb_radio1.setChecked(True)   
+            input_validator = QRegExpValidator(QRegExp("-[0-9]"), self.N_input)
+            self.N_input.setValidator(input_validator)     
+        else :
+            self.cb_radio1.setEnabled(False)
+            self.cb_radio2.setEnabled(True)
+            self.cb_radio3.setEnabled(True)
+            self.cb_radio4.setEnabled(True)
+            self.cb_radio5.setEnabled(True)
+            self.cb_radio2.setChecked(True)        
+            input_validator = QRegExpValidator(QRegExp("*"), self.N_input)
+            self.N_input.setValidator(input_validator)     
+
+        if self.mb_radio8.isChecked():
+            self.N_input.setText("3")
+    
 
     def simulate(self):
 
@@ -255,20 +317,27 @@ class Window(QWidget):
         self.alpha = float(self.alpha_input.text())
         self.N = int(self.N_input.text())
         
-#        alert = QMessageBox()
-#        alert.setText('You have selected '+self.method+' Method and '+self.circuit+' circuit '+'Fl='+str(self.fl)+'Fu='+str(self.fu)+'Fstep='+str(self.fstep)+'F='+str(self.F)+'alpha='+str(self.alpha)+'N='+str(self.N))
-#        alert.exec_()
-        if self.circuit == 'None':
-            self.Zmagi,self.Zphai,self.Zmag,self.Zpha,self.magError,self.phaError = calculator(self.F,self.alpha,self.fl,self.fu,self.method,self.fstep,self.N)
+        if (self.fl>self.fu) and ((self.fu-self.fl)%self.fstep!=0) :
+            alert = QMessageBox()
+            alert.setText('Invalid Input')
+            alert.exec_()
         else:
-            self.Zmagi,self.Zphai,self.Zmag,self.Zpha,self.magError,self.phaError = calculator(self.F,self.alpha,self.fl,self.fu,self.method,self.fstep,self.N,self.circuit)
-        
-        self.f = numpy.logspace(numpy.log10(self.fl),numpy.log10(self.fu),((numpy.log10(self.fu / self.fl))*self.fstep) + 1).T
-        
-        self.updatePlot()
+            try:
+                if self.circuit == 'None':
+                    self.Zmagi,self.Zphai,self.Zmag,self.Zpha,self.magError,self.phaError = calculator(self.F,self.alpha,self.fl,self.fu,self.method,self.fstep,self.N)
+                else:
+                    self.Zmagi,self.Zphai,self.Zmag,self.Zpha,self.magError,self.phaError = calculator(self.F,self.alpha,self.fl,self.fu,self.method,self.fstep,self.N,self.circuit)
+                self.f = numpy.logspace(numpy.log10(self.fl),numpy.log10(self.fu),((numpy.log10(self.fu / self.fl))*self.fstep) + 1).T
+                
+                self.updatePlot()
 
-        self.tabs.setCurrentIndex(1) #switch to output tab
+                self.tabs.setCurrentIndex(1) #switch to output tab
+            except:
+                alert = QMessageBox()
+                alert.setText('Simulation Failed. Please try a different configuration.')
+                alert.exec_()
 
+    
     def updatePlot(self):
         # create an axis
         ax1 = self.figure.add_subplot(211)
@@ -277,23 +346,39 @@ class Window(QWidget):
         if self.gs_radio1.isChecked():
             ax1.clear()                             # discards the old graph
             ax1.semilogx(self.f,self.Zmagi)         # plot data
+            ax1.set_xlabel('Frequency')
+            ax1.set_ylabel('Magnitude(dB)')
             ax2.clear()                             # discards the old graph
             ax2.semilogx(self.f,self.Zphai)         # plot data
+            ax2.set_xlabel('Frequency')
+            ax2.set_ylabel('Phase')
         elif self.gs_radio2.isChecked():
             ax1.clear()                             # discards the old graph
             ax1.semilogx(self.f,self.Zmag)          # plot data
+            ax1.set_xlabel('Frequency')
+            ax1.set_ylabel('Magnitude(dB)')
             ax2.clear()                             # discards the old graph
             ax2.semilogx(self.f,self.Zpha)          # plot data
+            ax2.set_xlabel('Frequency')
+            ax2.set_ylabel('Phase')
         elif self.gs_radio3.isChecked():
             ax1.clear()                             # discards the old graph
             ax1.semilogx(self.f,self.Zmagi,self.f,self.Zmag) # plot data
+            ax1.set_xlabel('Frequency')
+            ax1.set_ylabel('Magnitude(dB)')
             ax2.clear()                             # discards the old graph
             ax2.semilogx(self.f,self.Zphai,self.f,self.Zpha)# plot data
+            ax2.set_xlabel('Frequency')
+            ax2.set_ylabel('Phase')
         elif self.gs_radio4.isChecked():
             ax1.clear()                             # discards the old graph
             ax1.semilogx(self.f,self.magError)      # plot data
+            ax1.set_xlabel('Frequency')
+            ax1.set_ylabel('Magnitude(dB) \nNon Relative Error')
             ax2.clear()                             # discards the old graph
             ax2.semilogx(self.f,self.phaError)      # plot data
+            ax2.set_xlabel('Frequency')
+            ax2.set_ylabel('Phase \nRelative Error')
         ax1.grid()
         ax2.grid()        
         self.canvas.draw()                      # refresh canvas
