@@ -3,10 +3,8 @@
 # ..\MATLAB_files\Methodss.m
 import os
 import numpy
+import math
 import matplotlib.pyplot as plt
-
-from numpy import *
-from math import *
 
 from adhikari import adhikari_func
 from carlson import coeffcarlson
@@ -22,6 +20,9 @@ from oustaloup import coeffoustaloup
 from TheileSecondCFE import TheileSecondCFE_func
 from valsa import valsa_func
 from readOut import readOut_func
+
+from PySpice.Spice.NgSpice.Shared import NgSpiceShared
+
     
 def calculator(F=None,alp=None,fl=None,fu=None,s1=None,fstep=None,*args,**kwargs):
     varargin = args
@@ -286,41 +287,38 @@ def calculator(F=None,alp=None,fl=None,fu=None,s1=None,fstep=None,*args,**kwargs
                                 else:
                                     disp('method mentioned cant be implemented')
     
-    os.system('C:\\Cadence\\SPB_17.2\\tools\\bin\\psp_cmd.exe -r '+filename+'.cir'+' -wONLY')
+    
+    with open(filename+'.cir', 'r') as myfile:
+        circuit = myfile.read()
+    
+#    print(circuit)
+    ngspice = NgSpiceShared.new_instance()
+
+    ngspice.load_circuit(circuit)
+
+    ngspice.run()
+
+    ngspice.reset()
+    
+#    print('Plots:', ngspice.plot_names)
+
+#    print(ngspice.ressource_usage())
+
+#    plot = ngspice.plot(simulation=ngspice, plot_name=ngspice.last_plot)
+#    print(plot)
+
+    # os.system('C:\\Cadence\\SPB_17.2\\tools\\bin\\psp_cmd.exe -r '+filename+'.cir'+' -wONLY')
     data=readOut_func(filename+'.out')
-# ..\MATLAB_files\Methodss.m:173
-    Zmag=multiply(20,numpy.log10(divide(data['Data'][:,0],data['Data'][:,2])))
-# ..\MATLAB_files\Methodss.m:175
-    
-    Zpha=data['Data'][:,1] - data['Data'][:,3]
-# ..\MATLAB_files\Methodss.m:176
-    
-    if alp < 0:
-        Zpha=Zpha - 180
-# ..\MATLAB_files\Methodss.m:179
-    else:
-        Zpha=Zpha%180
-# ..\MATLAB_files\Methodss.m:181
+#    print(data)
+    Zmag = numpy.multiply(20,numpy.log10(numpy.divide( ((data['Data'][:,0])**2+(data['Data'][:,1])**2)**(1/2), ((data['Data'][:,2])**2+(data['Data'][:,3])**2)**(1/2) )))
+#    print(Zmag)
+    Zpha = numpy.arctan(data['Data'][:,1]/data['Data'][:,0]) - numpy.arctan(data['Data'][:,3]/data['Data'][:,2])
+    Zpha = Zpha * (180/math.pi)  
+#    print(Zpha)  
     
     Zmagi,Zphai,Zmag,Zpha,magError,phaError = errorcalculator(Zmag,Zpha,F,alp,fl,fh,fstep)
-# ..\MATLAB_files\Methodss.m:184
-#    figure
-#    plt.subplot(1,2,1)
-#    plt.semilogx(data['Freq'],magError)
-#    plt.grid('on')
-#    plt.xlabel('Frequency')
-#    plt.ylabel('Magnitude(dB) Non Relative Error')
-#    
-#    plt.subplot(1,2,2)
-#    plt.semilogx(data['Freq'],phaError)
-#    plt.grid('on')
-#    plt.xlabel('Frequency')
-#    plt.ylabel('Phase Relative Error')
-#
-#    plt.show()
 
     return Zmagi,Zphai,Zmag,Zpha,magError,phaError
 
 if __name__ == '__main__':
     pass
-#    Methodss(1,-0.5,1E-3,1E3,'adhikari',100)

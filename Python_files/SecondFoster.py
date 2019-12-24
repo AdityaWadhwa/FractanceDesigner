@@ -21,7 +21,7 @@ def SecondFoster_func(Num=None,Den=None,fl=None,fh=None,fstep=None,*args,**kwarg
 # ..\MATLAB_files\SecondFoster.m:9
         a = a - append((Clast*b),0)
 # ..\MATLAB_files\SecondFoster.m:10
-        a=a[1:end]
+        a=a[1:]
 # ..\MATLAB_files\SecondFoster.m:11
     else:
         Clast=0
@@ -61,31 +61,28 @@ def SecondFoster_func(Num=None,Den=None,fl=None,fh=None,fstep=None,*args,**kwarg
 # ..\MATLAB_files\SecondFoster.m:38
     
     line = []
-    line.append(['* Matlab created *.cir-file *'])
-# ..\MATLAB_files\SecondFoster.m:41
-    line.append(['.lib C:\\Cadence\\SPB_17.2\\tools\\pspice\\library\\eval.lib'])
-# ..\MATLAB_files\SecondFoster.m:42
-    line.append(['VIN        1   0   AC 1V'])
-# ..\MATLAB_files\SecondFoster.m:43
+    line.append(['* Python created *.cir-file for NGSpice *'])
+    line.append(['.TITLE Second Foster'])
+#    line.append(['.lib C:\\Cadence\\SPB_17.2\\tools\\pspice\\library\\eval.lib'])
+    line.append(['vin 1 0 DC 0 AC 1'])
     for i in range(0,len(C)):
         line.append(['R'+str(i+1)+' 1 '+str(i+2)+' '+str(R[i])])
-# ..\MATLAB_files\SecondFoster.m:45
         line.append(['C'+str(i+1)+' '+str(i+2)+' 0 '+str(C[i])])
-# ..\MATLAB_files\SecondFoster.m:46
-    
     line.append(['R'+str(len(R))+' 1 '+str(i+2)+' '+str(R[len(R)-1])])
-# ..\MATLAB_files\SecondFoster.m:48
-    line.append(['.AC DEC '+str(fstep)+' '+str(fl)+' '+str(fh)])
-# ..\MATLAB_files\SecondFoster.m:49
-    line.append(['.PRINT AC VM(1) VP(1) IM(VIN) IP(VIN)'])
-# ..\MATLAB_files\SecondFoster.m:50
+    line.append(['.control'])
+    line.append(['set wr_singlescale'])
+    line.append(['save i(vin) 1 v(1)'])
+    line.append(['AC DEC '+str(fstep)+' '+str(fl)+' '+str(fh)])
+    line.append(['wrdata '+filename+'.out '+ 'v(1) i(vin)'])
+    line.append(['.ENDC'])
     line.append(['.END'])
+
 # ..\MATLAB_files\SecondFoster.m:51
     # writing netlist to file
     f = open(filename+'.cir','w')
 # ..\MATLAB_files\SecondFoster.m:54
     for i in range(0,len(line)):
-        f.write(str(line[i])+'\n')
+        f.write(str(line[i][0])+'\n')
     
     f.close()
 # ..\MATLAB_files\SecondFoster.m:58

@@ -61,45 +61,36 @@ def adhikari_func(F=None,alp=None,fl=None,fh=None,fstep=None,N=None,*args,**kwar
 # ..\MATLAB_files\adhikari.m:39
     R = append(R,dot(dot(- a ** (N + 1),r),(1 / log(a))))
 
-    print(R)
-    print(C)
+#    print(R)
+#    print(C)
 # ..\MATLAB_files\adhikari.m:41
     filename='D:\\DocumentsHDD\\BTP\\GUIapp\\Pspice_files\\Adhikari'
 
     line = []
-# ..\MATLAB_files\adhikari.m:43
-    line.append(['* Matlab created *.cir-file *'])
-# ..\MATLAB_files\adhikari.m:45
-    line.append(['.lib C:\\Cadence\\SPB_17.2\\tools\\pspice\\library\\eval.lib'])
-# ..\MATLAB_files\adhikari.m:46
-    line.append(['VIN        1   0   AC 1V'])
-# ..\MATLAB_files\adhikari.m:47
+    line.append(['* Python created *.cir-file for NGSpice *'])
+    line.append(['.TITLE Adhikari'])
+#    line.append(['.lib C:\\Cadence\\SPB_17.2\\tools\\pspice\\library\\eval.lib'])
+    line.append(['vin 1 0 DC 0 AC 1'])
     line.append(['R'+str(1)+' '+str(1)+' '+str(2)+' '+str(R0)])
-# ..\MATLAB_files\adhikari.m:48
     line.append(['C'+str(1)+' '+str(1)+' '+str(2)+' '+str(C0)])
-# ..\MATLAB_files\adhikari.m:49
     for i in range(0,N + 1):
         line.append(['R'+str(i + 2)+' '+str(i + 2)+' '+str(i + 3)+' '+str(R[i])])
-# ..\MATLAB_files\adhikari.m:51
         line.append(['C'+str(i + 2)+' '+str(i + 2)+' '+str(i + 3)+' '+str(C[i])])
-# ..\MATLAB_files\adhikari.m:52
-    
     line.append(['R'+str(N + 3)+' '+str(N + 3)+' 0 '+str(R[N + 1])])
-# ..\MATLAB_files\adhikari.m:54
-    line.append(['.AC DEC '+str(fstep)+' '+str(fl)+' '+str(fh)])
-# ..\MATLAB_files\adhikari.m:55
-    line.append(['.PRINT AC VM(1) VP(1) IM(VIN) IP(VIN)'])
-# ..\MATLAB_files\adhikari.m:56
+    line.append(['.control'])
+    line.append(['set wr_singlescale'])
+    line.append(['save i(vin) 1 v(1)'])
+    line.append(['AC DEC '+str(fstep)+' '+str(fl)+' '+str(fh)])
+    line.append(['wrdata '+filename+'.out '+ 'v(1) i(vin)'])
+    line.append(['.ENDC'])
     line.append(['.END'])
-# ..\MATLAB_files\adhikari.m:57
+
     # writing netlist to file
     f=open((filename+'.cir'),'w')
-# ..\MATLAB_files\adhikari.m:60
     for i in range(0,len(line)):
         f.write(str(line[i][0])+'\n')
     
     f.close()
-# ..\MATLAB_files\adhikari.m:64
     return filename
     
 if __name__ == '__main__':

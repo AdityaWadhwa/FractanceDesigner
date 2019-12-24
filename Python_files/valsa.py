@@ -75,30 +75,24 @@ def valsa_func(F=None,alp=None,fl=None,fu=None,fstep=None,phierr=None,*args,**kw
     filename='D:\\DocumentsHDD\\BTP\\GUIapp\\Pspice_files\\Valsa'
 
     line = []
-# ..\MATLAB_files\valsa_func.m:49
-    line.append(['* Matlab created *.cir-file *'])
-# ..\MATLAB_files\valsa_func.m:51
-    line.append(['.lib C:\\Cadence\\SPB_17.2\\tools\\pspice\\library\\eval.lib'])
-# ..\MATLAB_files\valsa_func.m:52
-    line.append(['VIN        1   0   AC 1V'])
-# ..\MATLAB_files\valsa_func.m:53
+    line.append(['* Python created *.cir-file for NGSpice *'])
+    line.append(['.TITLE Adhikari'])
+#    line.append(['.lib C:\\Cadence\\SPB_17.2\\tools\\pspice\\library\\eval.lib'])
+    line.append(['vin 1 0 DC 0 AC 1'])
     line.append(['Rp'+' '+str(1)+' '+str(0)+' '+str(Rp)])
-# ..\MATLAB_files\valsa_func.m:54
     line.append(['Cp'+' '+str(1)+' '+str(0)+' '+str(Cp[0])])
-# ..\MATLAB_files\valsa_func.m:55
     for i in range(1,m):
         line.append(['R'+str(i)+' '+str(1)+' '+str(i + 1)+' '+str(R[i][0])])
-# ..\MATLAB_files\valsa_func.m:57
         line.append(['C'+str(i)+' '+str(i + 1)+' '+str(0)+' '+str(C[i][0])])
-# ..\MATLAB_files\valsa_func.m:58
-    
-    line.append(['.AC DEC '+str(fstep)+' '+str(fl)+' '+str(fu)])
-# ..\MATLAB_files\valsa_func.m:60
-    line.append(['.PRINT AC VM(1) VP(1) IM(VIN) IP(VIN)'])
-# ..\MATLAB_files\valsa_func.m:61
+    line.append(['.control'])
+    line.append(['set wr_singlescale'])
+    line.append(['save i(vin) 1 v(1)'])
+    line.append(['AC DEC '+str(fstep)+' '+str(fl)+' '+str(fu)])
+    line.append(['wrdata '+filename+'.out '+ 'v(1) i(vin)'])
+    line.append(['.ENDC'])
     line.append(['.END'])
-# ..\MATLAB_files\valsa_func.m:62
-    print(line)
+
+#    print(line)
     # writing netlist to file
     f=open((filename+'.cir'),'w')
 # ..\MATLAB_files\valsa_func.m:65

@@ -73,32 +73,28 @@ def SecondCauer_func(Numerator=None,Denominator=None,fl=None,fh=None,fstep=None,
 # ..\MATLAB_files\SecondCauer.m:47
     
     line = []
-    line.append(['* Matlab created *.cir-file *'])
-# ..\MATLAB_files\SecondCauer.m:50
-    line.append(['.lib C:\\Cadence\\SPB_17.2\\tools\\pspice\\library\\eval.lib'])
-# ..\MATLAB_files\SecondCauer.m:51
-    line.append(['VIN        1   0   AC 1V'])
-# ..\MATLAB_files\SecondCauer.m:52
+    line.append(['* Python created *.cir-file for NGSpice *'])
+    line.append(['.TITLE Second Cauer'])
+#    line.append(['.lib C:\\Cadence\\SPB_17.2\\tools\\pspice\\library\\eval.lib'])
+    line.append(['vin 1 0 DC 0 AC 1'])
     if size(nonzero(C!=0)[0])==0:
         k = 0
     else:
         k = nonzero(C!=0)[0][-1]//2 + 1
-# ..\MATLAB_files\SecondCauer.m:53
     for i in range(0,k+1):
         if R[2*i] != 0:
             line.append(['R'+str(i+1)+' '+str(i+1)+' 0 '+str(R[2*i])])
-# ..\MATLAB_files\SecondCauer.m:56
         if C[2*i+1] != 0:
-            line.append(['C'+str(i+2)+' '+str(i+1)+' '+str(i+2)+' '+str(C[2*i+1])])
-# ..\MATLAB_files\SecondCauer.m:59
-    
+            line.append(['C'+str(i+2)+' '+str(i+1)+' '+str(i+2)+' '+str(C[2*i+1])])    
     line.append(['R'+str(i + 2)+' '+str(i+1)+' 0 '+str(R[2*k])])
-# ..\MATLAB_files\SecondCauer.m:62
-    line.append(['.AC DEC '+str(fstep)+' '+str(fl)+' '+str(fh)])
-# ..\MATLAB_files\SecondCauer.m:63
-    line.append(['.PRINT AC VM(1) VP(1) IM(VIN) IP(VIN)'])
-# ..\MATLAB_files\SecondCauer.m:64
+    line.append(['.control'])
+    line.append(['set wr_singlescale'])
+    line.append(['save i(vin) 1 v(1)'])
+    line.append(['AC DEC '+str(fstep)+' '+str(fl)+' '+str(fh)])
+    line.append(['wrdata '+filename+'.out '+ 'v(1) i(vin)'])
+    line.append(['.ENDC'])
     line.append(['.END'])
+
 # ..\MATLAB_files\SecondCauer.m:65
     # writing netlist to file
     f=open(filename+'.cir','w')

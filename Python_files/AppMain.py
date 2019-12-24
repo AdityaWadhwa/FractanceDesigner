@@ -263,8 +263,6 @@ class Window(QWidget):
             self.cb_radio4.setEnabled(False)
             self.cb_radio5.setEnabled(False)
             self.cb_radio1.setChecked(True)   
-            input_validator = QRegExpValidator(QRegExp("-[0-9]"), self.N_input)
-            self.N_input.setValidator(input_validator)     
         else :
             self.cb_radio1.setEnabled(False)
             self.cb_radio2.setEnabled(True)
@@ -272,8 +270,6 @@ class Window(QWidget):
             self.cb_radio4.setEnabled(True)
             self.cb_radio5.setEnabled(True)
             self.cb_radio2.setChecked(True)        
-            input_validator = QRegExpValidator(QRegExp("*"), self.N_input)
-            self.N_input.setValidator(input_validator)     
 
         if self.mb_radio8.isChecked():
             self.N_input.setText("3")
