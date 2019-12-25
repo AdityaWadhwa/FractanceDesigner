@@ -4,6 +4,8 @@
 import numpy
 from numpy import * 
 from math import * 
+import sys, os
+frozen = 'not'
    
 def adhikari_func(F=None,alp=None,fl=None,fh=None,fstep=None,N=None,*args,**kwargs):
     varargin = args
@@ -63,9 +65,17 @@ def adhikari_func(F=None,alp=None,fl=None,fh=None,fstep=None,N=None,*args,**kwar
 
 #    print(R)
 #    print(C)
-# ..\MATLAB_files\adhikari.m:41
-    filename='D:\\DocumentsHDD\\BTP\\GUIapp\\Pspice_files\\Adhikari'
-
+    
+    if getattr(sys, 'frozen', False):
+        # we are running in a bundle
+        frozen = 'ever so'
+        bundle_dir = sys._MEIPASS
+    else:
+        # we are running in a normal Python environment
+        bundle_dir = os.path.dirname(os.path.abspath(__file__))
+    
+    filename=bundle_dir+'\Pspice_files\Adhikari'
+    
     line = []
     line.append(['* Python created *.cir-file for NGSpice *'])
     line.append(['.TITLE Adhikari'])

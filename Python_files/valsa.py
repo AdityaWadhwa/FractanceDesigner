@@ -4,6 +4,8 @@
 import numpy
 from numpy import * 
 from math import * 
+import sys, os
+frozen = 'not'
 
 def valsa_func(F=None,alp=None,fl=None,fu=None,fstep=None,phierr=None,*args,**kwargs):
     varargin = args
@@ -71,9 +73,17 @@ def valsa_func(F=None,alp=None,fl=None,fu=None,fstep=None,phierr=None,*args,**kw
     C=C / CR
 # ..\MATLAB_files\valsa_func.m:46
     Cp=Cp / CR
-# ..\MATLAB_files\valsa_func.m:47
-    filename='D:\\DocumentsHDD\\BTP\\GUIapp\\Pspice_files\\Valsa'
-
+    
+    if getattr(sys, 'frozen', False):
+        # we are running in a bundle
+        frozen = 'ever so'
+        bundle_dir = sys._MEIPASS
+    else:
+        # we are running in a normal Python environment
+        bundle_dir = os.path.dirname(os.path.abspath(__file__))
+    
+    filename=bundle_dir+'\Pspice_files\Valsa'
+    
     line = []
     line.append(['* Python created *.cir-file for NGSpice *'])
     line.append(['.TITLE Adhikari'])

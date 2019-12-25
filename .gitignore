@@ -1,4 +1,6 @@
 smop/
-Pspice_files/
+Python_files/Pspice_files/
+Python_files/build/
+Python_files/dist/
 *.out
 *.cir

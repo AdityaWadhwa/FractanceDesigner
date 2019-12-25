@@ -328,7 +328,8 @@ class Window(QWidget):
                 self.updatePlot()
 
                 self.tabs.setCurrentIndex(1) #switch to output tab
-            except:
+            except Exception as e: 
+                print(e)
                 alert = QMessageBox()
                 alert.setText('Simulation Failed. Please try a different configuration.')
                 alert.exec_()

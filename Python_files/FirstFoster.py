@@ -5,6 +5,8 @@ from copy import copy
 from numpy import * 
 from math import * 
 from scipy.signal import residue
+import sys, os
+frozen = 'not'
     
 def FirstFoster_func(Num=None,Den=None,fl=None,fh=None,fstep=None,*args,**kwargs):
     varargin = args
@@ -13,9 +15,18 @@ def FirstFoster_func(Num=None,Den=None,fl=None,fh=None,fstep=None,*args,**kwargs
     b=copy(Num)
 # ..\MATLAB_files\FirstFoster.m:3
     a=copy(Den)
-# ..\MATLAB_files\FirstFoster.m:4
-    filename='D:\\DocumentsHDD\\BTP\\GUIapp\\Pspice_files\\FirstFoster'
-# ..\MATLAB_files\FirstFoster.m:6
+
+    if getattr(sys, 'frozen', False):
+        # we are running in a bundle
+        frozen = 'ever so'
+        bundle_dir = sys._MEIPASS
+    else:
+        # we are running in a normal Python environment
+        bundle_dir = os.path.dirname(os.path.abspath(__file__))
+    
+    filename=bundle_dir+'\Pspice_files\FirstFoster'
+    
+    # ..\MATLAB_files\FirstFoster.m:6
     r,p,k=residue(b,a)
 # ..\MATLAB_files\FirstFoster.m:8
     

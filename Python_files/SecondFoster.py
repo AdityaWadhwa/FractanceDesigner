@@ -5,6 +5,8 @@ from copy import copy
 from numpy import * 
 from math import * 
 from scipy.signal import residue,deconvolve
+import sys, os
+frozen = 'not'
     
 def SecondFoster_func(Num=None,Den=None,fl=None,fh=None,fstep=None,*args,**kwargs):
     varargin = args
@@ -13,9 +15,18 @@ def SecondFoster_func(Num=None,Den=None,fl=None,fh=None,fstep=None,*args,**kwarg
     b=copy(Num)
 # ..\MATLAB_files\SecondFoster.m:3
     a=copy(Den)
-# ..\MATLAB_files\SecondFoster.m:4
-    filename='D:\\DocumentsHDD\\BTP\\GUIapp\\Pspice_files\\SecondFoster'
-# ..\MATLAB_files\SecondFoster.m:6
+    
+    if getattr(sys, 'frozen', False):
+        # we are running in a bundle
+        frozen = 'ever so'
+        bundle_dir = sys._MEIPASS
+    else:
+        # we are running in a normal Python environment
+        bundle_dir = os.path.dirname(os.path.abspath(__file__))
+    
+    filename=bundle_dir+'\Pspice_files\SecondFoster'
+    
+    # ..\MATLAB_files\SecondFoster.m:6
     if len(a[a>0]) > len(b[b>0]): #find(a > 0,1,'first') > find(b > 0,1,'first'):
         Clast=a[0] / b[0]
 # ..\MATLAB_files\SecondFoster.m:9

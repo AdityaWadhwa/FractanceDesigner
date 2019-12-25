@@ -5,6 +5,8 @@ from copy import copy
 import numpy
 from numpy import * 
 from math import * 
+import sys, os
+frozen = 'not'
     
 def FirstCauer_func(Numerator=None,Denominator=None,fl=None,fh=None,fstep=None,*args,**kwargs):
     varargin = args
@@ -13,8 +15,17 @@ def FirstCauer_func(Numerator=None,Denominator=None,fl=None,fh=None,fstep=None,*
     q=copy(Denominator)
 # ..\MATLAB_files\FirstCauer.m:3
     p=copy(Numerator)
-# ..\MATLAB_files\FirstCauer.m:4
-    filename='D:\\DocumentsHDD\\BTP\\GUIapp\\Pspice_files\\FirstCauer'
+
+    if getattr(sys, 'frozen', False):
+        # we are running in a bundle
+        frozen = 'ever so'
+        bundle_dir = sys._MEIPASS
+    else:
+        # we are running in a normal Python environment
+        bundle_dir = os.path.dirname(os.path.abspath(__file__))
+    
+    filename=bundle_dir+'\Pspice_files\FirstCauer'
+    
 # ..\MATLAB_files\FirstCauer.m:6
     Num=copy(p)
 # ..\MATLAB_files\FirstCauer.m:8
