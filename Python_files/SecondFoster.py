@@ -24,7 +24,7 @@ def SecondFoster_func(Num=None,Den=None,fl=None,fh=None,fstep=None,*args,**kwarg
         # we are running in a normal Python environment
         bundle_dir = os.path.dirname(os.path.abspath(__file__))
     
-    filename=bundle_dir+'\Pspice_files\SecondFoster'
+    filename=os.path.join(bundle_dir,'Pspice_files\SecondFoster').replace(" ","\\ ")
     
     # ..\MATLAB_files\SecondFoster.m:6
     if len(a[a>0]) > len(b[b>0]): #find(a > 0,1,'first') > find(b > 0,1,'first'):

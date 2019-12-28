@@ -24,7 +24,7 @@ def SecondCauer_func(Numerator=None,Denominator=None,fl=None,fh=None,fstep=None,
         # we are running in a normal Python environment
         bundle_dir = os.path.dirname(os.path.abspath(__file__))
     
-    filename=bundle_dir+'\Pspice_files\SecondCauer'
+    filename=os.path.join(bundle_dir,'Pspice_files\SecondCauer').replace(" ","\\ ")
     # ..\MATLAB_files\SecondCauer.m:6
     Num=copy(p)
 # ..\MATLAB_files\SecondCauer.m:8
