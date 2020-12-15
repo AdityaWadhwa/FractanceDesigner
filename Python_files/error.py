@@ -24,6 +24,9 @@ def errorcalculator(Zmag=None,Zpha=None,F=None,alp=None,fl=None,fh=None,fstep=No
     magError=abs((Zmag - Zmagi))
 # ..\MATLAB_files\errorcalculator.m:9
     phaError=abs((Zpha - Zphai) / Zphai)
+
+    magAvgError = average(magError)
+    phaAvgError = average(phaError)
 # ..\MATLAB_files\errorcalculator.m:10
 #    figure
 #    plt.subplot(1,2,1)
@@ -34,7 +37,7 @@ def errorcalculator(Zmag=None,Zpha=None,F=None,alp=None,fl=None,fh=None,fstep=No
 #
 #    plt.show()
 
-    return Zmagi,Zphai,Zmag,Zpha,magError,phaError
+    return Zmagi,Zphai,Zmag,Zpha,magError,phaError,magAvgError,phaAvgError
     
 if __name__ == '__main__':
     pass

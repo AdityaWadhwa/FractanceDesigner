@@ -316,9 +316,9 @@ def calculator(F=None,alp=None,fl=None,fu=None,s1=None,fstep=None,*args,**kwargs
     Zpha = Zpha * (180/math.pi)  
 #    print(Zpha)  
     
-    Zmagi,Zphai,Zmag,Zpha,magError,phaError = errorcalculator(Zmag,Zpha,F,alp,fl,fh,fstep)
+    Zmagi,Zphai,Zmag,Zpha,magError,phaError,magAvgError,phaAvgError = errorcalculator(Zmag,Zpha,F,alp,fl,fh,fstep)
 
-    return Zmagi,Zphai,Zmag,Zpha,magError,phaError
+    return Zmagi,Zphai,Zmag,Zpha,magError,phaError,magAvgError,phaAvgError
 
 if __name__ == '__main__':
     pass

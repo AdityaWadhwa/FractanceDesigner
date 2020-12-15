@@ -32,14 +32,14 @@ class Window(QWidget):
 
         self.methodBox = QGroupBox("Approximation Method")
         
-        self.mb_radio1 = QRadioButton("Adhikari Method")
-        self.mb_radio2 = QRadioButton("Valsa Method")
-        self.mb_radio3 = QRadioButton("Mastuda Method")
-        self.mb_radio4 = QRadioButton("Theile Second Method")
-        self.mb_radio5 = QRadioButton("Oustaloup Method")
-        self.mb_radio6 = QRadioButton("Modified Oustaloup Method")
-        self.mb_radio7 = QRadioButton("Charef Method")
-        self.mb_radio8 = QRadioButton("Carlson Method")
+        self.mb_radio1 = QRadioButton("OZASSB")
+        self.mb_radio2 = QRadioButton("VV")
+        self.mb_radio3 = QRadioButton("MF")
+        self.mb_radio4 = QRadioButton("THEILE2")
+        self.mb_radio5 = QRadioButton("OUSTALOUP")
+        self.mb_radio6 = QRadioButton("MODIFIED OUSTALOUP")
+        self.mb_radio7 = QRadioButton("CHAREF")
+        self.mb_radio8 = QRadioButton("CH")
         
         self.mb_radio1.setChecked(True)
 
@@ -320,9 +320,9 @@ class Window(QWidget):
         else:
             try:
                 if self.circuit == 'None':
-                    self.Zmagi,self.Zphai,self.Zmag,self.Zpha,self.magError,self.phaError = calculator(self.F,self.alpha,self.fl,self.fu,self.method,self.fstep,self.N)
+                    self.Zmagi,self.Zphai,self.Zmag,self.Zpha,self.magError,self.phaError,self.magAvgError,self.phaAvgError = calculator(self.F,self.alpha,self.fl,self.fu,self.method,self.fstep,self.N)
                 else:
-                    self.Zmagi,self.Zphai,self.Zmag,self.Zpha,self.magError,self.phaError = calculator(self.F,self.alpha,self.fl,self.fu,self.method,self.fstep,self.N,self.circuit)
+                    self.Zmagi,self.Zphai,self.Zmag,self.Zpha,self.magError,self.phaError,self.magAvgError,self.phaAvgError = calculator(self.F,self.alpha,self.fl,self.fu,self.method,self.fstep,self.N,self.circuit)
                 self.f = numpy.logspace(numpy.log10(self.fl),numpy.log10(self.fu),((numpy.log10(self.fu / self.fl))*self.fstep) + 1).T
                 
                 self.updatePlot()

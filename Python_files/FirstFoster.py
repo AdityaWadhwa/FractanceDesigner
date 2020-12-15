@@ -24,7 +24,7 @@ def FirstFoster_func(Num=None,Den=None,fl=None,fh=None,fstep=None,*args,**kwargs
         # we are running in a normal Python environment
         bundle_dir = os.path.dirname(os.path.abspath(__file__))
     
-    filename=os.path.join(bundle_dir,'Pspice_files\FirstFoster').replace(" ","\\ ")
+    filename=os.path.join(bundle_dir,'Pspice_files\FirstFoster')
     
     # ..\MATLAB_files\FirstFoster.m:6
     r,p,k=residue(b,a)

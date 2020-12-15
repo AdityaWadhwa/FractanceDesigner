@@ -11,7 +11,7 @@ fh = fu;
 l = nargin-6;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%11111%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-if (strcmpi(s1,'adhikari'))
+if (strcmpi(s1,'OZASSB'))
     if(l==0)
         N = 10;
     elseif(l==1)
@@ -19,7 +19,7 @@ if (strcmpi(s1,'adhikari'))
     end
     filename = adhikari(F,alp,fl,fh,fstep,N);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%2222222%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
-elseif(strcmpi(s1,'valsa'))
+elseif(strcmpi(s1,'VV'))
     if(l==0)
         phierr = 0.3;
     elseif(l==1)
@@ -27,7 +27,7 @@ elseif(strcmpi(s1,'valsa'))
     end
     filename = valsa_func(F,alp,fl,fu,fstep,phierr);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%33333333%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-elseif(strcmpi(s1,'mastuda'))
+elseif(strcmpi(s1,'MF'))
     if(l==0)
        N = 4;
        param1 = 'FirstFoster';
@@ -50,7 +50,7 @@ elseif(strcmpi(s1,'mastuda'))
         filename = SecondCauer(num,den,fl,fu,fstep);
     end
 %%%%%%%%%%%%%%%%%%%%%%%%44444444%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
-elseif(strcmpi(s1,'TheileSecond'))
+elseif(strcmpi(s1,'THEILE2'))
     if(l==0)
        N = 4;
        param1 = 'FirstFoster';
@@ -73,7 +73,7 @@ elseif(strcmpi(s1,'TheileSecond'))
         filename = SecondCauer(num,den,fl,fu,fstep);
     end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%555555555%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-elseif(strcmpi(s1,'Oustaloup'))
+elseif(strcmpi(s1,'OUSTALOUP'))
     if(l==0)
        N = 4;
        param1 = 'FirstFoster';
@@ -96,7 +96,7 @@ elseif(strcmpi(s1,'Oustaloup'))
         filename = SecondCauer(num,den,fl,fu,fstep);
     end    
 %%%%%%%%%%%%%%%%%%%%%%%%%%%66666666666%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-elseif(strcmpi(s1,'ModiOustaloup'))
+elseif(strcmpi(s1,'MODIFIED OUSTALOUP'))
     if(l==0)
        N = 4;
        param1 = 'FirstFoster';
@@ -119,7 +119,7 @@ elseif(strcmpi(s1,'ModiOustaloup'))
         filename = SecondCauer(num,den,fl,fu,fstep);
     end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%7777777%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-elseif(strcmpi(s1,'Charef'))
+elseif(strcmpi(s1,'CHAREF'))
     if(l==0)
        derr = 1;
        param1 ='FirstFoster';
@@ -141,7 +141,7 @@ elseif(strcmpi(s1,'Charef'))
     elseif(strcmpi(param1,'SecondCauer'))
         filename = SecondCauer(num,den,fl,fu,fstep);
     end
-elseif(strcmpi(s1,'Carlson'))
+elseif(strcmpi(s1,'CH'))
     if(l==0)
        N = 1;
        param1 ='FirstFoster';

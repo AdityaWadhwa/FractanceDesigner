@@ -82,7 +82,7 @@ def valsa_func(F=None,alp=None,fl=None,fu=None,fstep=None,phierr=None,*args,**kw
         # we are running in a normal Python environment
         bundle_dir = os.path.dirname(os.path.abspath(__file__))
     
-    filename=os.path.join(bundle_dir,'Pspice_files\Valsa').replace(" ","\\ ")
+    filename=os.path.join(bundle_dir,'Pspice_files\Valsa')
     
     line = []
     line.append(['* Python created *.cir-file for NGSpice *'])

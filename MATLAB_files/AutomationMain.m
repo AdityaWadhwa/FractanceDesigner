@@ -4,13 +4,13 @@ close all;
 
 F   = 1;
 alp = -0.5;
-fl  = 1E0;
+fl  = 1E-3;
 fh  = 1E3;
-N   = 5;
+N   = 3;
 fstep = 100;
  
-[Num,Den] = coeffoustaloup(F,alp,fl,fh,N);
-filename = Brunes(Num,Den,fl,fh,fstep);
+[Num,Den] = coeffmodoustaloup(F,alp,fl,fh,N);
+filename = FirstFoster(Num,Den,fl,fh,fstep);
 
 % filename = valsa_func(F,alp,fl,fh,fstep,0.5);
 

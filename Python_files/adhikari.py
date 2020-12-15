@@ -74,7 +74,7 @@ def adhikari_func(F=None,alp=None,fl=None,fh=None,fstep=None,N=None,*args,**kwar
         # we are running in a normal Python environment
         bundle_dir = os.path.dirname(os.path.abspath(__file__))
     
-    filename=os.path.join(bundle_dir,'Pspice_files\Adhikari').replace(" ","\\ ")
+    filename=os.path.join(bundle_dir,'Pspice_files\Adhikari')
     
     line = []
     line.append(['* Python created *.cir-file for NGSpice *'])
